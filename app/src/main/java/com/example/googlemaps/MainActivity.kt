@@ -21,9 +21,9 @@ class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_
         }
     }
 
-//    override fun retrieveLocationChange(location: Location) {
-//        Log.d("lokasi device","latitude: ${location.latitude} longitude: ${location.longitude}")
-//    }
+    override fun retrieveLocationChange(location: Location) {
+        Log.d("lokasi device","latitude: ${location.latitude} longitude: ${location.longitude}")
+    }
 
     override fun onResume() {
         super.onResume()
@@ -36,7 +36,8 @@ class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_
     }
 
     override fun onDestroy() {
-        super.onDestroy()        binding.mapview.onDestroy()
+        super.onDestroy()
+        binding.mapview.onDestroy()
     }
 
     override fun onLowMemory() {
