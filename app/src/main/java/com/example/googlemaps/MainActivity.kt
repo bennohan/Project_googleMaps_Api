@@ -7,22 +7,37 @@ import android.util.Log
 import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.checkLocationPermission
 import com.example.googlemaps.databinding.ActivityMainBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.mapview.onCreate(savedInstanceState)
 
         checkLocationPermission {
             listenLocationChange()
         }
 
-        binding.mapview.getMapAsync { googleMap ->
-        }
     }
 
+
     override fun retrieveLocationChange(location: Location) {
-        Log.d("lokasi device","latitude: ${location.latitude} longitude: ${location.longitude}")
+        Log.d("lokasi device", "lat: ${location.latitude} lng: ${location.longitude}")
+
+        binding.mapview.getMapAsync { googleMap ->
+
+            val latLng = LatLng(location.latitude, location.longitude)
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20f))
+
+//            googleMap.addMarker(markerOptions { (R.drawable.marker_map) })
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+            )
+        }
     }
 
     override fun onResume() {
