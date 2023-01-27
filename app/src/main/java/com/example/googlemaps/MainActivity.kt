@@ -7,9 +7,15 @@ import android.util.Log
 import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.checkLocationPermission
 import com.example.googlemaps.databinding.ActivityMainBinding
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.internal.ui.AutocompleteImplFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 
 class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -21,8 +27,21 @@ class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_
             listenLocationChange()
         }
 
-    }
+        Places.initialize(applicationContext,"AIzaSyA93v2ZHUjqw81UV22_u-Y0Uam3nc4fc5Q")
 
+        val autocompleteImplFragment = supportFragmentManager.findFragmentById(R.id.fragment_autoComplete) as AutocompleteSupportFragment
+        autocompleteImplFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteImplFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+            override fun onPlaceSelected(place: Place) {
+                Log.i("Latihan_autoComplete","Place:${place.name},${place.id}")
+            }
+
+            override fun onError(status: Status) {
+                Log.i("Latihan_autoComplete","An Error Accuered : $status")
+            }
+        })
+
+    }
 
     override fun retrieveLocationChange(location: Location) {
         Log.d("lokasi device", "lat: ${location.latitude} lng: ${location.longitude}")
