@@ -2,8 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'com.google.firebase.crashlytics'
     id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -67,4 +69,7 @@ dependencies {
 
     //place
     implementation 'com.google.android.libraries.places:places:3.0.0'
+
+    //route
+    implementation 'com.github.malikdawar:drawroute:1.5'
 }
