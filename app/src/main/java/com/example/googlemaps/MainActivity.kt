@@ -28,15 +28,15 @@ class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_
         val crocodic = LatLng(-7.0644051, 110.4165274)
         val hermina = LatLng(-7.0727976,110.411677)
 
-        binding.mapview.getMapAsync { googleMap ->
-            googleMap.drawRouteOnMap(
-                mapsApiKey = getString(R.string.google_api_key).base64decrypt(),
-                source = crocodic,
-                destination = hermina,
-                context = applicationContext
-            )
-            googleMap.setPadding(100,100,100,100)
-        }
+//        binding.mapview.getMapAsync { googleMap ->
+//            googleMap.drawRouteOnMap(
+//                mapsApiKey = getString(R.string.google_api_key).base64decrypt(),
+//                source = crocodic,
+//                destination = hermina,
+//                context = applicationContext
+//            )
+//            googleMap.setPadding(100,100,100,100)
+//        }
 
 
         checkLocationPermission {
